@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=61.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "arepyextras-eo_products"
+description = "ArePyExtras EO Products is the Aresys Python module containing utilities to manage external SAR product formats."
+authors = [{ name = "Aresys S.R.L.", email = "info@aresys.it" }]
+license = { text = "MIT" }
+classifiers = [
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Utilities",
+    "License :: OSI Approved :: MIT License",
+]
+requires-python = ">= 3.9"
+dependencies = [
+    "arepytools >= 1.6.1",
+    "numpy >= 1.20",
+    "lxml",
+    "tifffile",
+    "zarr"
+    ]
+dynamic = ["version"]
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[tool.setuptools]
+license-files = ["LICENSE.txt"]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+exclude = ["tests", "tests*"]
+namespaces = true
+
+[tool.setuptools.dynamic]
+version = { attr = "arepyextras.eo_products.__version__" }
