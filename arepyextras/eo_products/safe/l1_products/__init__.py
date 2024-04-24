@@ -2,6 +2,6 @@
 # SPDX-License-Identifier: MIT
 
 """
-EO Products: SAFE L1 reading utilities
---------------------------------------
+EO Products: Sentinel-1 SAFE L1 reading utilities
+-------------------------------------------------
 """

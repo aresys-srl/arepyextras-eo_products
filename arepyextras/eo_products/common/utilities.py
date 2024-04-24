@@ -8,6 +8,9 @@ Common Enum, dataclasses and other utilities
 from dataclasses import dataclass
 from enum import Enum, auto
 
+from arepytools.timing.precisedatetime import PreciseDateTime
+from numpy.polynomial import Polynomial
+
 
 class SARRadiometricQuantity(Enum):
     """Enum class for radiometric analysis input/output quantity types"""
@@ -33,6 +36,13 @@ class SARProjection(Enum):
     GROUND_RANGE = "GROUND RANGE"
 
 
+class OrbitDirection(Enum):
+    """Orbit direction: ascending or descending"""
+
+    ASCENDING = "ascending"
+    DESCENDING = "descending"
+
+
 @dataclass
 class SARSamplingFrequencies:
     """SAR signal sampling frequencies"""
@@ -41,3 +51,12 @@ class SARSamplingFrequencies:
     range_bandwidth_freq_hz: float
     azimuth_freq_hz: float
     azimuth_bandwidth_freq_hz: float
+
+
+@dataclass
+class ConversionPolynomial:
+    """Generic conversion polynomial wrapper"""
+
+    azimuth_reference_time: PreciseDateTime
+    origin: float
+    polynomial: Polynomial

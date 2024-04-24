@@ -2,6 +2,6 @@
 # SPDX-License-Identifier: MIT
 
 """
-EO Products: Sentinel-1 SAFE format manager
--------------------------------------------
+EO Products: NovaSAR format manager
+-----------------------------------
 """

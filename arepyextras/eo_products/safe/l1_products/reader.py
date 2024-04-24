@@ -147,6 +147,7 @@ def read_channel_metadata(
     general_info = support.S1GeneralChannelInfo.from_metadata_node(header_node=header, product_info_node=product_info)
     image_annotation = root.find("imageAnnotation")
     image_information = image_annotation.find("imageInformation")
+    antenna_pattern = root.find("antennaPattern")
 
     # orbit
     if external_orbit_path is None:
@@ -234,6 +235,21 @@ def read_channel_metadata(
     coord_conversion_node = root.find("coordinateConversion/coordinateConversionList")
     coords_conversion = support.S1CoordinateConversions.from_metadata_node(coord_conversion_node=coord_conversion_node)
 
+    # chirp replica
+    replica_list_info = general_annotation.find("replicaInformationList")
+    chirp_replicas = []
+    for item in replica_list_info:
+        chirp_replicas.append(support.S1ChirpReplica.from_metadata_node(replica_info_node=item))
+    chirp_replicas = {c.swath: c for c in chirp_replicas}
+
+    # noise
+    noise_list = general_annotation.find("noiseList")
+    noise = support.noise_from_metadata_nodes(noise_list_node=noise_list)
+
+    # antenna pattern
+    antenna_pattern_list = antenna_pattern.find("antennaPatternList")
+    antenna = support.antenna_pattern_from_metadata_nodes(antenna_pattern_list_node=antenna_pattern_list)
+
     # composing output channel dataclass
     return support.S1ChannelMetadata(
         general_info=general_info,
@@ -250,6 +266,9 @@ def read_channel_metadata(
         pulse=pulse,
         coordinate_conversions=coords_conversion,
         state_vectors=state_vectors,
+        chirp_replica=chirp_replicas,
+        noise=noise,
+        antenna_pattern=antenna,
     )
 
 
