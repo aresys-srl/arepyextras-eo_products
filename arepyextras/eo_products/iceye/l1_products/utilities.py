@@ -1144,6 +1144,7 @@ def _retrieve_acquisition_time(arg_in: list[Path]) -> PreciseDateTime:
 
 
 def _retrieve_scene_footprint(arg_in: list[Path]) -> tuple[float, float, float, float]:
+
     xml_file = [f for f in arg_in if str(f).endswith(_GRD_METADATA_EXTENSION)]
     h5_file = [f for f in arg_in if str(f).endswith(_SLC_DATA_EXTENSION)]
     footprint_grd, footprint_slc = None, None

@@ -943,8 +943,6 @@ class NovaSAR1ChannelMetadata:
     attitude: NovaSAR1Attitude
     image_calibration_factor: float
     image_radiometric_quantity: SARRadiometricQuantity
-    lines_time_ordering: NovaSAR1TimeOrdering
-    samples_time_ordering: NovaSAR1TimeOrdering
     burst_info: NovaSAR1BurstInfo
     raster_info: meta.RasterInfo
     dataset_info: meta.DataSetInfo
@@ -980,12 +978,9 @@ class NovaSAR1Product:
         self._channels_number = len(self._data_paths)
 
         # acquisition time and channels list
-        (
-            self._acq_time,
-            self._product_type,
-            self._channel_list_by_swath_id,
-            self._footprint,
-        ) = get_basic_info_from_metadata(metadata_path=self._metadata_path)
+        self._acq_time, self._product_type, self._channel_list_by_swath_id, self._footprint = (
+            get_basic_info_from_metadata(metadata_path=self._metadata_path)
+        )
 
     @property
     def acquisition_time(self) -> PreciseDateTime:

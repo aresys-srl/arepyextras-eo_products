@@ -9,3 +9,4 @@ API reference
    novasar
    iceye
    saocom
+   eos04

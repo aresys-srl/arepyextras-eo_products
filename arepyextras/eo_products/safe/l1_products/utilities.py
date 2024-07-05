@@ -1335,13 +1335,9 @@ class S1Product:
         self._manifest = S1Manifest(manifest_path=self._layout.manifest)
 
         # locating relative data and metadata paths inside SAFE product folder
-        (
-            data_rel_paths,
-            metadata_rel_paths,
-            calibration_rel_paths,
-            acquisition_time,
-            footprint,
-        ) = self._manifest.parse_manifest_document()
+        (data_rel_paths, metadata_rel_paths, calibration_rel_paths, acquisition_time, footprint) = (
+            self._manifest.parse_manifest_document()
+        )
         # validating channel data pairs (raster + metadata)
         self._validate_channel_pairs(data_rel_paths, metadata_rel_paths)
 

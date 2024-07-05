@@ -113,10 +113,6 @@ def read_product_metadata(xml_path: Union[str, Path]) -> dict[str, support.NovaS
     elif "sigma" in image_radiometric_quantity:
         image_radiometric_quantity = SARRadiometricQuantity.SIGMA_NOUGHT
 
-    # image lines time ordering
-    lines_time_ordering = support.NovaSAR1TimeOrdering[image_attributes_node.find("LineTimeOrdering").text.upper()]
-    pixels_time_ordering = support.NovaSAR1TimeOrdering[image_attributes_node.find("PixelTimeOrdering").text.upper()]
-
     # sampling constants
     if product_type == support.NovaSAR1ProductType.SLC:
         sampling_constants = SARSamplingFrequencies(
@@ -168,8 +164,6 @@ def read_product_metadata(xml_path: Union[str, Path]) -> dict[str, support.NovaS
             general_info=general_info,
             image_calibration_factor=image_calibration_factor,
             image_radiometric_quantity=image_radiometric_quantity,
-            lines_time_ordering=lines_time_ordering,
-            samples_time_ordering=pixels_time_ordering,
             raster_info=raster_info,
             burst_info=burst_info,
             dataset_info=dataset_info,
@@ -192,8 +186,6 @@ def read_channel_data(
     raster_file: Union[str, Path],
     block_to_read: list[int] | None = None,
     scaling_conversion: float = 1,
-    lines_time_ordering: support.NovaSAR1TimeOrdering = support.NovaSAR1TimeOrdering.INCREASING,
-    samples_time_ordering: support.NovaSAR1TimeOrdering = support.NovaSAR1TimeOrdering.INCREASING,
 ) -> np.ndarray:
     """Reading NovaSAR-1 tif channel data file.
 
@@ -212,10 +204,6 @@ def read_channel_data(
 
     scaling_conversion : float, optional
         scaling conversion to be multiplied to the data read
-    lines_time_ordering : support.NovaSAR1TimeOrdering, optional
-        lines time ordering in the product, by default support.NovaSAR1TimeOrdering.INCREASING
-    samples_time_ordering : support.NovaSAR1TimeOrdering, optional
-        samples time ordering in the product, by default support.NovaSAR1TimeOrdering.INCREASING
 
     Returns
     -------
@@ -239,16 +227,6 @@ def read_channel_data(
 
     # applying input scaling factor
     target_area = target_area * scaling_conversion
-
-    if samples_time_ordering == support.NovaSAR1TimeOrdering.DECREASING:
-        # flipping image along pixel (range) direction to take into account reverse pixel time ordering
-        # range is axis 1
-        target_area = np.flip(target_area, 1)
-
-    if lines_time_ordering == support.NovaSAR1TimeOrdering.DECREASING:
-        # flipping image along lines (azimuth) direction to take into account reverse lines time ordering
-        # azimuth is axis 0
-        target_area = np.flip(target_area, 0)
 
     return target_area
 

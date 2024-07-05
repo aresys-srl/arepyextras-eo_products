@@ -1,6 +1,17 @@
 Changelog
 =========
 
+v1.0.1
+------
+
+**Additional Features**
+
+- ``EOS-04 L1 products``: added support for reading EOS-04 products (SLC, GRD), stripmap and topsar
+
+**Bug Fixes**
+
+- Minor bug fixes
+
 v1.0.0
 ------
 

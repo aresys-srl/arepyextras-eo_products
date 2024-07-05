@@ -6,6 +6,7 @@
 import unittest
 
 from arepyextras.eo_products.common.protocols import EOL1ProductProtocol
+from arepyextras.eo_products.eos.l1_products.utilities import EOS04Product
 from arepyextras.eo_products.iceye.l1_products.utilities import ICEYEProduct
 from arepyextras.eo_products.novasar.l1_products.utilities import NovaSAR1Product
 from arepyextras.eo_products.safe.l1_products.utilities import S1Product
@@ -30,6 +31,10 @@ class ProductProtocolComplianceTest(unittest.TestCase):
     def test_product_compliance_saocom(self) -> None:
         """Assessing protocol compliance"""
         assert isinstance(SAOCOMProduct, EOL1ProductProtocol)
+
+    def test_product_compliance_eos04(self) -> None:
+        """Assessing protocol compliance"""
+        assert isinstance(EOS04Product, EOL1ProductProtocol)
 
 
 if __name__ == "__main__":

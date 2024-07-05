@@ -76,7 +76,7 @@ def read_channel_metadata(file_path: Path | str, channel_id: str) -> support.SAO
     coordinate_conversions = support.SAOCOMCoordinateConversions.from_metadata(node=root)
 
     return support.SAOCOMChannelMetadata(
-        image_radiometric_quantity=SARRadiometricQuantity.BETA_NOUGHT,
+        image_radiometric_quantity=SARRadiometricQuantity.SIGMA_NOUGHT,
         general_info=general_info,
         raster_info=raster_info,
         general_sar_orbit=gso,
