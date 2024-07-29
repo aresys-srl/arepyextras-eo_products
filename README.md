@@ -15,9 +15,3 @@ The package can be installed via pip:
 ```shell
 pip install arepyextras-eo_products
 ```
-
-or via conda:
-
-```shell
-conda install arepyextras-eo_products
-```
