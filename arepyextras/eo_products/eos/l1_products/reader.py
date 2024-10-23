@@ -148,7 +148,7 @@ def read_product_metadata(xml_path: str | Path, channels: list[str]) -> dict[str
         # image calibration factor
         calibration_constant_db = [
             float(c.text)
-            for c in image_attributes_node.findall("CalibrationConstant")
+            for c in image_attributes_node.findall("CalibrationConstant_Beta0")
             if c.get("pol") == polarization.name
         ][0]
         calibration_factor = 1 / (10 ** (calibration_constant_db / 20))
