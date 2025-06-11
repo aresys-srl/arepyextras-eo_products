@@ -1,6 +1,13 @@
 Changelog
 =========
 
+v1.0.2
+------
+
+**Additional Features**
+
+- ``Envisat/ERS L1 products``: added support for reading ENVISAT (ASAR) products (SLC, GRD), IMS and WSM_1P
+
 v1.0.1
 ------
 

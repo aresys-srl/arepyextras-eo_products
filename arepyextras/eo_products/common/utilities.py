@@ -5,11 +5,23 @@
 Common Enum, dataclasses and other utilities
 --------------------------------------------
 """
+
 from dataclasses import dataclass
 from enum import Enum, auto
 
 from arepytools.timing.precisedatetime import PreciseDateTime
 from numpy.polynomial import Polynomial
+
+
+class StandardSARAcquisitionMode(Enum):
+    """Standard cross-package SAR acquisition mode definition"""
+
+    SCANSAR = auto()
+    SPOTLIGHT = auto()
+    STRIPMAP = auto()
+    TOPSAR = auto()
+    WAVE = auto()
+    UNKNOWN = auto()
 
 
 class SARRadiometricQuantity(Enum):

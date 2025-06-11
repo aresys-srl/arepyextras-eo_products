@@ -2,8 +2,6 @@
 # SPDX-License-Identifier: MIT
 
 """
-Earth Observation Product Formats package
+EO Products: Envisat & ERS format manager
 -----------------------------------------
 """
-
-__version__ = "1.0.2"
