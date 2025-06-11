@@ -9,6 +9,7 @@ List of supported formats:
 - **ICEYE**: SLC and GRD products [topsar, stripmap, spotlight]
 - **SAOCOM**: SLC and GRD products [topsar, stripmap]
 - **EOS-04**: SLC and GRD products [scansar, stripmap]
+- **ENVISAT/ERS**: SLC and GRD ASAR products
 
 The package can be installed via pip:
 
