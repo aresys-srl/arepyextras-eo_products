@@ -35,7 +35,7 @@ from numpy.typing import ArrayLike
 from scipy.constants import speed_of_light
 from scipy.interpolate import CubicSpline
 
-_DATA_EXTENSION = ".N1"
+_DATA_EXTENSIONS = [".N1", ".E1", ".E2"]
 MPH_SIZE = 1247
 
 unit_of_measure_removal_re = re.compile("<.*>")
@@ -594,7 +594,7 @@ class ASARMainProductHeader:
                 content_dict["SENSING_START"]
             ),
             sensing_stop=PreciseDateTime.from_utc_string(content_dict["SENSING_STOP"]),
-            phase=int(content_dict["PHASE"]),
+            phase=content_dict["PHASE"],
             cycle=int(content_dict["CYCLE"]),
             relative_orbit=int(content_dict["REL_ORBIT"]),
             absolute_orbit=int(content_dict["ABS_ORBIT"]),
@@ -1210,7 +1210,7 @@ def is_asar_product(product: str | Path) -> bool:
 
     Conditions to be met for basic validity:
         - path exists
-        - path is a .N1 file
+        - file has the proper extension
         - open file and read product headers (MPH, SPH)
 
     Parameters
@@ -1228,7 +1228,8 @@ def is_asar_product(product: str | Path) -> bool:
     if not product.exists():
         return False
 
-    if not str(product).endswith(_DATA_EXTENSION):
+    extensions_check = [str(product).endswith(e) for e in _DATA_EXTENSIONS]
+    if not any(extensions_check):
         return False
 
     # open product, read acquisition mode
