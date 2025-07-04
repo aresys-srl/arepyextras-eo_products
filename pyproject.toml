@@ -27,11 +27,11 @@ dependencies = [
     "zarr",
     "h5py",
     "imagecodecs",
-    "pyepr"
     ]
 dynamic = ["version"]
 
 [project.optional-dependencies]
+heritage = ["pyepr"]
 dev = ['black', 'isort', 'pylint']
 doc = [
     "ipython",
